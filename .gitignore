@@ -1,0 +1,43 @@
+# ========== Logs ==========
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ========== Node modules ==========
+client-fundraze/node_modules/
+server-fundraze/node_modules/
+
+# ========== Build output ==========
+client-fundraze/dist/
+client-fundraze/dist-ssr/
+client-fundraze/build/
+
+server-fundraze/dist/
+server-fundraze/build/
+
+# ========== Environment files ==========
+client-fundraze/.env
+client-fundraze/.env.local
+client-fundraze/.env.*.local
+
+server-fundraze/.env
+server-fundraze/.env.local
+server-fundraze/.env.*.local
+
+# ========== Editor / OS files ==========
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ========== Coverage & Testing ==========
+coverage/
+*.lcov
