@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { formatDistanceToNow } from "date-fns";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import { toast } from "react-toastify";
-import { redToast } from "../utils/toastStyles";
+import { redToast, greenToast } from "../utils/toastStyles";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-
 const ReceivedBidsTable = ({ bids }) => {
   const [activeTab, setActiveTab] = useState("pending");
+  const [bidList, setBidList] = useState([]);
 
-  const filteredBids = bids.filter((bid) => {
+  useEffect(() => {
+    setBidList(bids); // initialize local copy
+  }, [bids]);
+
+  const filteredBids = bidList.filter((bid) => {
     if (activeTab === "all") return true;
     return bid.status?.toLowerCase() === activeTab;
   });
@@ -24,42 +28,48 @@ const ReceivedBidsTable = ({ bids }) => {
   };
 
   const handleAccept = async (id) => {
-  try {
-    const token = localStorage.getItem("token");
+    try {
+      const token = localStorage.getItem("token");
 
-    await axios.patch(`${BASE_URL}/api/bids/${id}/accept`, {}, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      withCredentials: true,
-    });
+      await axios.patch(`${BASE_URL}/api/bids/${id}/accept`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
 
-    window.location.reload(); // you can replace this with toast later
-  } catch (err) {
-  if (err.response) {
-    console.log("❌ Server error:", err.response.status, err.response.data);
-    toast(`❌ ${err.response.data.message || "Failed to accept bid."}`, redToast);
-  }
-}
+      setBidList((prev) =>
+        prev.map((bid) =>
+          bid._id === id ? { ...bid, status: "Accepted" } : bid
+        )
+      );
 
-};
-
+      toast("✅ Bid accepted successfully!", greenToast);
+    } catch (err) {
+      console.error("❌ Accept bid error:", err);
+      toast("❌ Failed to accept bid.", redToast);
+    }
+  };
 
   const handleReject = async (id) => {
-  try {
-    await axios.patch(`${BASE_URL}/api/bids/${id}/reject`, {}, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-      withCredentials: true, 
-    });
+    try {
+      const token = localStorage.getItem("token");
 
-    window.location.reload();
-  } catch (err) {
-    console.error("❌ Error rejecting bid:", err);
-    toast("❌ Failed to reject bid.", redToast);
-  }
-};
+      await axios.patch(`${BASE_URL}/api/bids/${id}/reject`, {}, {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+      });
+
+      setBidList((prev) =>
+        prev.map((bid) =>
+          bid._id === id ? { ...bid, status: "Rejected" } : bid
+        )
+      );
+
+      toast("❌ Bid rejected.", redToast);
+    } catch (err) {
+      console.error("❌ Reject bid error:", err);
+      toast("❌ Failed to reject bid.", redToast);
+    }
+  };
 
   const startupName = bids[0]?.startup?.title;
 
@@ -120,8 +130,8 @@ const ReceivedBidsTable = ({ bids }) => {
                   <td className="px-4 py-2 text-gray-500">
                     {bid.createdAt
                       ? formatDistanceToNow(new Date(bid.createdAt), {
-                        addSuffix: true,
-                      })
+                          addSuffix: true,
+                        })
                       : "—"}
                   </td>
                   <td className="px-4 py-2 space-x-2">
