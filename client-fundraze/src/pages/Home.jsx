@@ -11,7 +11,7 @@ import {
     ResponsiveContainer,
     CartesianGrid,
 } from "recharts";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 
 
 
@@ -65,7 +65,11 @@ const Home = () => {
         <div className="min-h-screen bg-white text-black">
             {/* Navbar */}
             <nav className="flex items-center justify-between px-6 py-4 bg-white text-black shadow">
-                <div className="text-2xl font-bold">Fundraze</div>
+                <div className="flex items-center gap-2">
+                    <img src="/favicon.png" alt="Fundraze Logo" className="h-10 w-10" />
+                    <span className="text-2xl font-bold text-gray-800">Fundraze</span>
+                </div>
+
                 <ul className="flex gap-6 text-sm font-medium">
                     <li><a href="#startup">Startup</a></li>
                     <li><a href="#investor">Investor</a></li>
