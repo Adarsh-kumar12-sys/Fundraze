@@ -66,7 +66,7 @@ const Home = () => {
             {/* Navbar */}
             <nav className="flex items-center justify-between px-6 py-4 bg-white text-black shadow">
                 <div className="flex items-center gap-2">
-                    <img src="/favicon.png" alt="Fundraze Logo" className="h-10 w-10" />
+                    <img src="/favicon.jpg" alt="Fundraze Logo" className="h-10 w-10" />
                     <span className="text-2xl font-bold text-gray-800">Fundraze</span>
                 </div>
 
