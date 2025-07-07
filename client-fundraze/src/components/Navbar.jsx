@@ -1,8 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const TopBar = () => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -10,7 +11,8 @@ const TopBar = () => {
   };
 
   const handleLiveFundingRefresh = () => {
-    window.location.reload(); // Refresh the current page
+    // Navigate to the same route to trigger re-render instead of full reload
+    navigate(location.pathname, { replace: true });
   };
 
   return (
