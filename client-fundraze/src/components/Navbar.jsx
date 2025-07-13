@@ -11,8 +11,9 @@ const TopBar = () => {
   };
 
   const handleLiveFundingRefresh = () => {
-    // Navigate to the same route to trigger re-render instead of full reload
-    navigate(location.pathname, { replace: true });
+    const currentPath = location.pathname;
+    const timestamp = new Date().getTime();
+    navigate(`${currentPath}?refresh=${timestamp}`);
   };
 
   return (

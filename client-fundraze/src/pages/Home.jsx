@@ -223,11 +223,11 @@ const Home = () => {
                             <ResponsiveContainer width="100%" height={250}>
                                 <BarChart
                                     data={[
-                                        { year: "2024", count: 200 },
-                                        { year: "2025", count: 500 },
-                                        { year: "2026", count: 800 },
-                                        { year: "2027", count: 1500 },
-                                        { year: "2028", count: 2500 },
+                                        { year: "2021", count: 200 },
+                                        { year: "2022", count: 500 },
+                                        { year: "2023", count: 800 },
+                                        { year: "2024", count: 1500 },
+                                        { year: "2025", count: 1000 },
                                     ]}
                                 >
                                     <CartesianGrid strokeDasharray="3 3" />
@@ -252,11 +252,11 @@ const Home = () => {
                             <ResponsiveContainer width="100%" height={250}>
                                 <BarChart
                                     data={[
-                                        { year: "2024", count: 3000 },
-                                        { year: "2025", count: 7000 },
-                                        { year: "2026", count: 12000 },
-                                        { year: "2027", count: 18000 },
-                                        { year: "2028", count: 22000 },
+                                        { year: "2021", count: 3000 },
+                                        { year: "2022", count: 7000 },
+                                        { year: "2023", count: 12000 },
+                                        { year: "2024", count: 18000 },
+                                        { year: "2025", count: 22000 },
                                     ]}
                                 >
                                     <CartesianGrid strokeDasharray="3 3" />
